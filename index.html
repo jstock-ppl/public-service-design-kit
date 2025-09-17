@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Card Collection</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: #ffffff;
+            color: #333333;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .header {
+            text-align: center;
+            padding: 4rem 2rem 2rem;
+            background: #ffffff;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            color: #333333;
+            margin-bottom: 1rem;
+            letter-spacing: 2px;
+            font-weight: 300;
+        }
+
+        .header .subtitle {
+            font-size: 1.4rem;
+            color: #666666;
+            font-style: italic;
+            margin-bottom: 2rem;
+        }
+
+        .header .description {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            color: #555555;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Phase Selection View */
+        .phase-selection {
+            display: block;
+        }
+
+        .phase-instruction {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #666666;
+            font-size: 1.2rem;
+        }
+
+        .phase-piles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            justify-items: center;
+            margin-bottom: 3rem;
+        }
+
+        .phase-pile {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .phase-pile:hover {
+            transform: translateY(-10px);
+        }
+
+        .pile-card {
+            width: 250px;
+            height: 438px; /* Tarot proportions: 2.5" x 4.375" */
+            background: #f5f5f5;
+            border: 2px dashed #cccccc;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999999;
+            font-size: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pile-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 13px;
+        }
+
+        .show-all-btn {
+            display: block;
+            margin: 0 auto 3rem auto;
+            background: #666666;
+            color: #ffffff;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .show-all-btn:hover {
+            background: #333333;
+            transform: translateY(-2px);
+        }
+
+        /* Cards View */
+        .cards-view {
+            display: none;
+        }
+
+        .back-btn {
+            background: #333333;
+            color: #ffffff;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .back-btn:hover {
+            background: #555555;
+            transform: translateY(-2px);
+        }
+
+        .phase-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #333333;
+            margin-bottom: 1rem;
+        }
+
+        .cards-instruction {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #666666;
+            font-style: italic;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            perspective: 1000px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 420px; /* Tarot proportions */
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+
+        .card.flipped .card-inner {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            overflow: hidden;
+            background: #f5f5f5;
+            border: 2px dashed #cccccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999999;
+            font-size: 0.9rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+        }
+
+        .card-face img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .phase-piles {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+            
+            .pile-card {
+                width: 180px;
+                height: 315px;
+            }
+            
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .card-inner {
+                height: 300px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .phase-piles {
+                grid-template-columns: 1fr;
+            }
+            
+            .pile-card {
+                width: 200px;
+                height: 350px;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <h1>Your Card Collection</h1>
+        <p class="subtitle">Your Subtitle Goes Here</p>
+        <div class="description">
+            <p>Welcome to your card collection. Replace this text with your own description about your cards, their purpose, or any story you'd like to share. This is completely customizable.</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Phase Selection View -->
+        <div class="phase-selection" id="phaseView">
+            <p class="phase-instruction">Choose a phase to explore, or view all cards at once</p>
+            
+            <button class="show-all-btn" onclick="showAllCards()">View All Cards</button>
+            
+            <div class="phase-piles">
+                <div class="phase-pile" onclick="showPhase('phase1')">
+                    <div class="pile-card">
+                        <img src="images/phase1-back.png" alt="Phase 1" onerror="this.style.display='none'; this.parentElement.innerHTML='Phase 1<br>Add phase1-back.png';">
+                    </div>
+                </div>
+
+                <div class="phase-pile" onclick="showPhase('phase2')">
+                    <div class="pile-card">
+                        <img src="images/phase2-back.png" alt="Phase 2" onerror="this.style.display='none'; this.parentElement.innerHTML='Phase 2<br>Add phase2-back.png';">
+                    </div>
+                </div>
+
+                <div class="phase-pile" onclick="showPhase('phase3')">
+                    <div class="pile-card">
+                        <img src="images/phase3-back.png" alt="Phase 3" onerror="this.style.display='none'; this.parentElement.innerHTML='Phase 3<br>Add phase3-back.png';">
+                    </div>
+                </div>
+
+                <div class="phase-pile" onclick="showPhase('phase4')">
+                    <div class="pile-card">
+                        <img src="images/phase4-back.png" alt="Phase 4" onerror="this.style.display='none'; this.parentElement.innerHTML='Phase 4<br>Add phase4-back.png';">
+                    </div>
+                </div>
+
+                <div class="phase-pile" onclick="showPhase('phase5')">
+                    <div class="pile-card">
+                        <img src="images/phase5-back.png" alt="Phase 5" onerror="this.style.display='none'; this.parentElement.innerHTML='Phase 5<br>Add phase5-back.png';">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Individual Cards View -->
+        <div class="cards-view" id="cardsView">
+            <button class="back-btn" onclick="backToPhases()">← Back to Phases</button>
+            <h2 class="phase-title" id="currentTitle">Cards</h2>
+            <p class="cards-instruction">Click on any card to flip it over</p>
+            <div class="cards-grid" id="cardsGrid">
+                <!-- Cards will be inserted here by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const cards = [
+            // Phase 1
+            {id: 'card1', phase: 'phase1'},
+            {id: 'card2', phase: 'phase1'},
+            {id: 'card3', phase: 'phase1'},
+            {id: 'card4', phase: 'phase1'},
+            {id: 'card5', phase: 'phase1'},
+            // Phase 2
+            {id: 'card6', phase: 'phase2'},
+            {id: 'card7', phase: 'phase2'},
+            {id: 'card8', phase: 'phase2'},
+            {id: 'card9', phase: 'phase2'},
+            {id: 'card10', phase: 'phase2'},
+            // Phase 3
+            {id: 'card11', phase: 'phase3'},
+            {id: 'card12', phase: 'phase3'},
+            {id: 'card13', phase: 'phase3'},
+            {id: 'card14', phase: 'phase3'},
+            {id: 'card15', phase: 'phase3'},
+            // Phase 4
+            {id: 'card16', phase: 'phase4'},
+            {id: 'card17', phase: 'phase4'},
+            {id: 'card18', phase: 'phase4'},
+            {id: 'card19', phase: 'phase4'},
+            {id: 'card20', phase: 'phase4'},
+            // Phase 5
+            {id: 'card21', phase: 'phase5'},
+            {id: 'card22', phase: 'phase5'},
+            {id: 'card23', phase: 'phase5'},
+            {id: 'card24', phase: 'phase5'},
+            {id: 'card25', phase: 'phase5'}
+        ];
+
+        function showPhase(phase) {
+            document.getElementById('phaseView').style.display = 'none';
+            document.getElementById('cardsView').style.display = 'block';
+            document.getElementById('currentTitle').textContent = phase.charAt(0).toUpperCase() + phase.slice(1);
+            
+            const phaseCards = cards.filter(card => card.phase === phase);
+            renderCards(phaseCards);
+        }
+
+        function showAllCards() {
+            document.getElementById('phaseView').style.display = 'none';
+            document.getElementById('cardsView').style.display = 'block';
+            document.getElementById('currentTitle').textContent = 'All Cards';
+            renderCards(cards);
+        }
+
+        function backToPhases() {
+            document.getElementById('cardsView').style.display = 'none';
+            document.getElementById('phaseView').style.display = 'block';
+            document.getElementById('cardsGrid').innerHTML = '';
+        }
+
+        function renderCards(cardList) {
+            const grid = document.getElementById('cardsGrid');
+            grid.innerHTML = '';
+            
+            cardList.forEach(card => {
+                const cardEl = document.createElement('div');
+                cardEl.className = 'card';
+                cardEl.onclick = () => flipCard(cardEl);
+                
+                cardEl.innerHTML = `
+                    <div class="card-inner">
+                        <div class="card-face card-front">
+                            <img src="images/${card.id}-front.png" alt="${card.id} front" 
+                                 onerror="this.style.display='none'; this.parentElement.innerHTML='${card.id}<br>Add ${card.id}-front.png';">
+                        </div>
+                        <div class="card-face card-back">
+                            <img src="images/${card.id}-back.png" alt="${card.id} back" 
+                                 onerror="this.style.display='none'; this.parentElement.innerHTML='${card.id}<br>Add ${card.id}-back.png';">
+                        </div>
+                    </div>
+                `;
+                
+                grid.appendChild(cardEl);
+            });
+        }
+
+        function flipCard(card) {
+            card.classList.toggle('flipped');
+        }
+    </script>
+</body>
+</html>
