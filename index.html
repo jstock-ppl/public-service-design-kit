@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Card Collection</title>
     <style>
-        <style>
-        /* Add these font declarations first */
         @font-face {
             font-family: 'Public Sans';
             src: url('fonts/PublicSans-Regular.otf') format('opentype');
@@ -23,24 +21,18 @@
         
         @font-face {
             font-family: 'Sharp Grotesk';
-            src: url('fonts/SharpGrotesk-Medium.otf') format('opentype');
+            src: url('fonts/SharpGrotesk-Medium20.otf') format('opentype');
             font-weight: 500;
             font-display: swap;
         }
         
         @font-face {
             font-family: 'Sharp Grotesk';
-            src: url('fonts/SharpGrotesk-Bold.otf') format('opentype');
+            src: url('fonts/SharpGrotesk-SemiBold20.otf') format('opentype');
             font-weight: 700;
             font-display: swap;
         }
 
-        /* Then your existing styles start here */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
         * {
             margin: 0;
             padding: 0;
@@ -91,7 +83,6 @@
             padding: 2rem;
         }
 
-        /* Phase Selection View */
         .phase-selection {
             display: block;
         }
@@ -124,7 +115,7 @@
 
         .pile-card {
             width: 220px;
-            height: 385px; /* Tarot proportions: 2.5" x 4.375" */
+            height: 385px;
             background: #f5f5f5;
             border: 2px dashed #cccccc;
             border-radius: 15px;
@@ -165,7 +156,6 @@
             transform: translateY(-2px);
         }
 
-        /* Cards View */
         .cards-view {
             display: none;
         }
@@ -221,7 +211,7 @@
         .card-inner {
             position: relative;
             width: 100%;
-            height: 420px; /* Tarot proportions */
+            height: 420px;
             transform-style: preserve-3d;
             transition: transform 0.6s;
         }
@@ -257,6 +247,10 @@
             height: 100%;
             object-fit: cover;
             border-radius: 13px;
+        }
+
+        h1, h2, h3, .phase-title, .header h1, .header .subtitle {
+            font-family: 'Sharp Grotesk', 'Public Sans', sans-serif;
         }
 
         @media (max-width: 768px) {
@@ -298,10 +292,6 @@
                 grid-template-columns: 1fr;
             }
         }
-           /* Use Sharp Grotesk for all headings */
-        h1, h2, h3, .phase-title, .header h1, .header .subtitle {
-            font-family: 'Sharp Grotesk', 'Public Sans', sans-serif;
-        }
     </style>
 </head>
 <body>
@@ -314,7 +304,6 @@
     </header>
 
     <div class="container">
-        <!-- Phase Selection View -->
         <div class="phase-selection" id="phaseView">
             <p class="phase-instruction">Choose a phase to explore, or view all cards at once</p>
             
@@ -353,49 +342,22 @@
             </div>
         </div>
 
-        <!-- Individual Cards View -->
         <div class="cards-view" id="cardsView">
             <button class="back-btn" onclick="backToPhases()">← Back to Phases</button>
             <h2 class="phase-title" id="currentTitle">Cards</h2>
             <p class="cards-instruction">Click on any card to flip it over</p>
             <div class="cards-grid" id="cardsGrid">
-                <!-- Cards will be inserted here by JavaScript -->
             </div>
         </div>
     </div>
 
     <script>
         const cards = [
-            // Phase 1
-            {id: 'card1', phase: 'phase1'},
-            {id: 'card2', phase: 'phase1'},
-            {id: 'card3', phase: 'phase1'},
-            {id: 'card4', phase: 'phase1'},
-            {id: 'card5', phase: 'phase1'},
-            // Phase 2
-            {id: 'card6', phase: 'phase2'},
-            {id: 'card7', phase: 'phase2'},
-            {id: 'card8', phase: 'phase2'},
-            {id: 'card9', phase: 'phase2'},
-            {id: 'card10', phase: 'phase2'},
-            // Phase 3
-            {id: 'card11', phase: 'phase3'},
-            {id: 'card12', phase: 'phase3'},
-            {id: 'card13', phase: 'phase3'},
-            {id: 'card14', phase: 'phase3'},
-            {id: 'card15', phase: 'phase3'},
-            // Phase 4
-            {id: 'card16', phase: 'phase4'},
-            {id: 'card17', phase: 'phase4'},
-            {id: 'card18', phase: 'phase4'},
-            {id: 'card19', phase: 'phase4'},
-            {id: 'card20', phase: 'phase4'},
-            // Phase 5
-            {id: 'card21', phase: 'phase5'},
-            {id: 'card22', phase: 'phase5'},
-            {id: 'card23', phase: 'phase5'},
-            {id: 'card24', phase: 'phase5'},
-            {id: 'card25', phase: 'phase5'}
+            {id: 'card1', phase: 'phase1'}, {id: 'card2', phase: 'phase1'}, {id: 'card3', phase: 'phase1'}, {id: 'card4', phase: 'phase1'}, {id: 'card5', phase: 'phase1'},
+            {id: 'card6', phase: 'phase2'}, {id: 'card7', phase: 'phase2'}, {id: 'card8', phase: 'phase2'}, {id: 'card9', phase: 'phase2'}, {id: 'card10', phase: 'phase2'},
+            {id: 'card11', phase: 'phase3'}, {id: 'card12', phase: 'phase3'}, {id: 'card13', phase: 'phase3'}, {id: 'card14', phase: 'phase3'}, {id: 'card15', phase: 'phase3'},
+            {id: 'card16', phase: 'phase4'}, {id: 'card17', phase: 'phase4'}, {id: 'card18', phase: 'phase4'}, {id: 'card19', phase: 'phase4'}, {id: 'card20', phase: 'phase4'},
+            {id: 'card21', phase: 'phase5'}, {id: 'card22', phase: 'phase5'}, {id: 'card23', phase: 'phase5'}, {id: 'card24', phase: 'phase5'}, {id: 'card25', phase: 'phase5'}
         ];
 
         function showPhase(phase) {
