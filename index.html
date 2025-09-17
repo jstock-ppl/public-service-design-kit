@@ -5,6 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Card Collection</title>
     <style>
+        <style>
+        /* Add these font declarations first */
+        @font-face {
+            font-family: 'Public Sans';
+            src: url('fonts/PublicSans-Regular.otf') format('opentype');
+            font-weight: 400;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'Public Sans';
+            src: url('fonts/PublicSans-Medium.otf') format('opentype');
+            font-weight: 500;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'Sharp Grotesk';
+            src: url('fonts/SharpGrotesk-Medium.otf') format('opentype');
+            font-weight: 500;
+            font-display: swap;
+        }
+        
+        @font-face {
+            font-family: 'Sharp Grotesk';
+            src: url('fonts/SharpGrotesk-Bold.otf') format('opentype');
+            font-weight: 700;
+            font-display: swap;
+        }
+
+        /* Then your existing styles start here */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         * {
             margin: 0;
             padding: 0;
@@ -12,7 +48,7 @@
         }
 
         body {
-            font-family: 'Georgia', serif;
+            font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
             background: #ffffff;
             color: #333333;
             min-height: 100vh;
@@ -261,6 +297,10 @@
             .cards-grid {
                 grid-template-columns: 1fr;
             }
+        }
+           /* Use Sharp Grotesk for all headings */
+        h1, h2, h3, .phase-title, .header h1, .header .subtitle {
+            font-family: 'Sharp Grotesk', 'Public Sans', sans-serif;
         }
     </style>
 </head>
