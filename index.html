@@ -198,8 +198,11 @@
         
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            justify-items: center;
         }
         
         .card {
@@ -214,8 +217,8 @@
 
         .card-inner {
             position: relative;
-            width: 100%;
-            height: 420px;
+            width: 220px;  /* Same as pile-card width */
+            height: 385px; /* Same as pile-card height */
             transform-style: preserve-3d;
             transition: transform 0.6s;
         }
