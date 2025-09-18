@@ -284,7 +284,7 @@
     
     .pile-card {
         width: 160px;
-        height: 280px;
+        height: 280px; /* Maintains 1.75:1 ratio */
     }
     
     .cards-header {
@@ -313,7 +313,7 @@
     }
     
     .card-inner {
-        height: 350px;
+        height: 420px; /* Keep same tall proportion as desktop */
     }
 }
 
@@ -329,10 +329,13 @@
     
     .pile-card {
         width: 180px;
-        height: 315px;
+        height: 315px; /* Maintains tall ratio */
     }
-}
-            
+    
+    .card-inner {
+        height: 400px; /* Still tall on small screens */
+    }
+}  
             .cards-grid {
                 grid-template-columns: 1fr;
             }
