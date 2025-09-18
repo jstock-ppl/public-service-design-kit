@@ -392,6 +392,9 @@
             cardEl.className = 'card';
             cardEl.onclick = () => flipCard(cardEl);
             
+            // Use the phase name to determine back image
+            const backImage = card.phase.toLowerCase() + '-back.png';
+            
             cardEl.innerHTML = `
                 <div class="card-inner">
                     <div class="card-face card-front">
@@ -399,8 +402,8 @@
                              onerror="this.style.display='none'; this.parentElement.innerHTML='${card.id}<br>Add ${card.id}-front.png';">
                     </div>
                     <div class="card-face card-back">
-                        <img src="images/${card.id}-back.png" alt="${card.id} back" 
-                             onerror="this.style.display='none'; this.parentElement.innerHTML='${card.id}<br>Add ${card.id}-back.png';">
+                        <img src="images/${backImage}" alt="${card.phase} back" 
+                             onerror="this.style.display='none'; this.parentElement.innerHTML='${card.phase}<br>Add ${backImage}';">
                     </div>
                 </div>
             `;
