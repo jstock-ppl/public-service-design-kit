@@ -311,31 +311,31 @@
             <div class="phase-piles">
                 <div class="phase-pile" onclick="showPhase('Plan')">
                     <div class="pile-card">
-                        <img src="images/Plan-back.png" alt="Phase 1" onerror="this.style.display='none'; this.parentElement.innerHTML='Phase 1<br>Add Plan-back.png';">
+                        <img src="images/plan-back.png" alt="Plan" onerror="this.style.display='none'; this.parentElement.innerHTML='Plan<br>Add Plan-back.png';">
                     </div>
                 </div>
 
-                <div class="phase-pile" onclick="showPhase('phase2')">
+                <div class="phase-pile" onclick="showPhase('Research')">
                     <div class="pile-card">
-                        <img src="images/phase2-back.png" alt="Phase 2" onerror="this.style.display='none'; this.parentElement.innerHTML='Phase 2<br>Add phase2-back.png';">
+                        <img src="images/research-back.png" alt="Research" onerror="this.style.display='none'; this.parentElement.innerHTML='Research<br>Add research-back.png';">
                     </div>
                 </div>
 
-                <div class="phase-pile" onclick="showPhase('phase3')">
+                <div class="phase-pile" onclick="showPhase('Design')">
                     <div class="pile-card">
-                        <img src="images/phase3-back.png" alt="Phase 3" onerror="this.style.display='none'; this.parentElement.innerHTML='Phase 3<br>Add phase3-back.png';">
+                        <img src="images/design-back.png" alt="Design" onerror="this.style.display='none'; this.parentElement.innerHTML='Design<br>Add design-back.png';">
                     </div>
                 </div>
 
-                <div class="phase-pile" onclick="showPhase('phase4')">
+                <div class="phase-pile" onclick="showPhase('Deploy')">
                     <div class="pile-card">
-                        <img src="images/phase4-back.png" alt="Phase 4" onerror="this.style.display='none'; this.parentElement.innerHTML='Phase 4<br>Add phase4-back.png';">
+                        <img src="images/deploy-back.png" alt="Deploy" onerror="this.style.display='none'; this.parentElement.innerHTML='Deploy<br>Add deploy-back.png';">
                     </div>
                 </div>
 
-                <div class="phase-pile" onclick="showPhase('phase5')">
+                <div class="phase-pile" onclick="showPhase('Scale')">
                     <div class="pile-card">
-                        <img src="images/phase5-back.png" alt="Phase 5" onerror="this.style.display='none'; this.parentElement.innerHTML='Phase 5<br>Add phase5-back.png';">
+                        <img src="images/scale-back.png" alt="Scale" onerror="this.style.display='none'; this.parentElement.innerHTML='Scale<br>Add scale-back.png';">
                     </div>
                 </div>
             </div>
@@ -352,11 +352,11 @@
 
     <script>
         const cards = [
-            {id: 'card1', phase: 'Plan'}, {id: 'card2', phase: 'Plan'}, {id: 'card3', phase: 'Plan'}, {id: 'card4', phase: 'Plan'}, {id: 'card5', phase: 'Plan'},
-            {id: 'card6', phase: 'phase2'}, {id: 'card7', phase: 'phase2'}, {id: 'card8', phase: 'phase2'}, {id: 'card9', phase: 'phase2'}, {id: 'card10', phase: 'phase2'},
-            {id: 'card11', phase: 'phase3'}, {id: 'card12', phase: 'phase3'}, {id: 'card13', phase: 'phase3'}, {id: 'card14', phase: 'phase3'}, {id: 'card15', phase: 'phase3'},
-            {id: 'card16', phase: 'phase4'}, {id: 'card17', phase: 'phase4'}, {id: 'card18', phase: 'phase4'}, {id: 'card19', phase: 'phase4'}, {id: 'card20', phase: 'phase4'},
-            {id: 'card21', phase: 'phase5'}, {id: 'card22', phase: 'phase5'}, {id: 'card23', phase: 'phase5'}, {id: 'card24', phase: 'phase5'}, {id: 'card25', phase: 'phase5'}
+            {id: 'card1', phase: 'plan'}, {id: 'card2', phase: 'plan'}, {id: 'card3', phase: 'plan'}, {id: 'card4', phase: 'plan'}, {id: 'card5', phase: 'plan'},
+            {id: 'card6', phase: 'research'}, {id: 'card7', phase: 'research'}, {id: 'card8', phase: 'research'}, {id: 'card9', phase: 'research'}, {id: 'card10', phase: 'research'},
+            {id: 'card11', phase: 'design'}, {id: 'card12', phase: 'design'}, {id: 'card13', phase: 'design'}, {id: 'card14', phase: 'design'}, {id: 'card15', phase: 'design'},
+            {id: 'card16', phase: 'deploy'}, {id: 'card17', phase: 'deploy'}, {id: 'card18', phase: 'deploy'}, {id: 'card19', phase: 'deploy'}, {id: 'card20', phase: 'deploy'},
+            {id: 'card21', phase: 'scale'}, {id: 'card22', phase: 'scale'}, {id: 'card23', phase: 'scale'}, {id: 'card24', phase: 'scale'}, {id: 'card25', phase: 'scale'}
         ];
 
         function showPhase(phase) {
