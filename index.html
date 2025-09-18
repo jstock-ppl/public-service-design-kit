@@ -307,7 +307,7 @@
     </header>
         <div class="container">
         <div class="phase-selection" id="phaseView">            
-            <button class="show-all-btn" onclick="showAllCards()">View All Cards</button>
+            <button class="show-all-btn" onclick="showAllCards()">View All Methods</button>
             
             <div class="phase-piles">
                 <div class="phase-pile" onclick="showPhase('Plan')">
@@ -373,7 +373,7 @@
     function showAllCards() {
         document.getElementById('phaseView').style.display = 'none';
         document.getElementById('cardsView').style.display = 'block';
-        document.getElementById('currentTitle').textContent = 'All Cards';
+        document.getElementById('currentTitle').textContent = 'All Methods';
         renderCards(cards);
     }
 
