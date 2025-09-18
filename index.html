@@ -351,65 +351,65 @@
     </div>
 
     <script>
-        const cards = [
-            {id: 'card1', phase: 'plan'}, {id: 'card2', phase: 'plan'}, {id: 'card3', phase: 'plan'}, {id: 'card4', phase: 'plan'}, {id: 'card5', phase: 'plan'},
-            {id: 'card6', phase: 'research'}, {id: 'card7', phase: 'research'}, {id: 'card8', phase: 'research'}, {id: 'card9', phase: 'research'}, {id: 'card10', phase: 'research'},
-            {id: 'card11', phase: 'design'}, {id: 'card12', phase: 'design'}, {id: 'card13', phase: 'design'}, {id: 'card14', phase: 'design'}, {id: 'card15', phase: 'design'},
-            {id: 'card16', phase: 'deploy'}, {id: 'card17', phase: 'deploy'}, {id: 'card18', phase: 'deploy'}, {id: 'card19', phase: 'deploy'}, {id: 'card20', phase: 'deploy'},
-            {id: 'card21', phase: 'scale'}, {id: 'card22', phase: 'scale'}, {id: 'card23', phase: 'scale'}, {id: 'card24', phase: 'scale'}, {id: 'card25', phase: 'scale'}
-        ];
+    const cards = [
+        {id: 'card1', phase: 'Plan'}, {id: 'card2', phase: 'Plan'}, {id: 'card3', phase: 'Plan'}, {id: 'card4', phase: 'Plan'}, {id: 'card5', phase: 'Plan'},
+        {id: 'card6', phase: 'Research'}, {id: 'card7', phase: 'Research'}, {id: 'card8', phase: 'Research'}, {id: 'card9', phase: 'Research'}, {id: 'card10', phase: 'Research'},
+        {id: 'card11', phase: 'Design'}, {id: 'card12', phase: 'Design'}, {id: 'card13', phase: 'Design'}, {id: 'card14', phase: 'Design'}, {id: 'card15', phase: 'Design'},
+        {id: 'card16', phase: 'Deploy'}, {id: 'card17', phase: 'Deploy'}, {id: 'card18', phase: 'Deploy'}, {id: 'card19', phase: 'Deploy'}, {id: 'card20', phase: 'Deploy'},
+        {id: 'card21', phase: 'Scale'}, {id: 'card22', phase: 'Scale'}, {id: 'card23', phase: 'Scale'}, {id: 'card24', phase: 'Scale'}, {id: 'card25', phase: 'Scale'}
+    ];
 
-        function showPhase(phase) {
-            document.getElementById('phaseView').style.display = 'none';
-            document.getElementById('cardsView').style.display = 'block';
-            document.getElementById('currentTitle').textContent = phase.charAt(0).toUpperCase() + phase.slice(1);
+    function showPhase(phase) {
+        document.getElementById('phaseView').style.display = 'none';
+        document.getElementById('cardsView').style.display = 'block';
+        document.getElementById('currentTitle').textContent = phase;
+        
+        const phaseCards = cards.filter(card => card.phase === phase);
+        renderCards(phaseCards);
+    }
+
+    function showAllCards() {
+        document.getElementById('phaseView').style.display = 'none';
+        document.getElementById('cardsView').style.display = 'block';
+        document.getElementById('currentTitle').textContent = 'All Cards';
+        renderCards(cards);
+    }
+
+    function backToPhases() {
+        document.getElementById('cardsView').style.display = 'none';
+        document.getElementById('phaseView').style.display = 'block';
+        document.getElementById('cardsGrid').innerHTML = '';
+    }
+
+    function renderCards(cardList) {
+        const grid = document.getElementById('cardsGrid');
+        grid.innerHTML = '';
+        
+        cardList.forEach(card => {
+            const cardEl = document.createElement('div');
+            cardEl.className = 'card';
+            cardEl.onclick = () => flipCard(cardEl);
             
-            const phaseCards = cards.filter(card => card.phase === phase);
-            renderCards(phaseCards);
-        }
-
-        function showAllCards() {
-            document.getElementById('phaseView').style.display = 'none';
-            document.getElementById('cardsView').style.display = 'block';
-            document.getElementById('currentTitle').textContent = 'All Cards';
-            renderCards(cards);
-        }
-
-        function backToPhases() {
-            document.getElementById('cardsView').style.display = 'none';
-            document.getElementById('phaseView').style.display = 'block';
-            document.getElementById('cardsGrid').innerHTML = '';
-        }
-
-        function renderCards(cardList) {
-            const grid = document.getElementById('cardsGrid');
-            grid.innerHTML = '';
-            
-            cardList.forEach(card => {
-                const cardEl = document.createElement('div');
-                cardEl.className = 'card';
-                cardEl.onclick = () => flipCard(cardEl);
-                
-                cardEl.innerHTML = `
-                    <div class="card-inner">
-                        <div class="card-face card-front">
-                            <img src="images/${card.id}-front.png" alt="${card.id} front" 
-                                 onerror="this.style.display='none'; this.parentElement.innerHTML='${card.id}<br>Add ${card.id}-front.png';">
-                        </div>
-                        <div class="card-face card-back">
-                            <img src="images/${card.id}-back.png" alt="${card.id} back" 
-                                 onerror="this.style.display='none'; this.parentElement.innerHTML='${card.id}<br>Add ${card.id}-back.png';">
-                        </div>
+            cardEl.innerHTML = `
+                <div class="card-inner">
+                    <div class="card-face card-front">
+                        <img src="images/${card.id}-front.png" alt="${card.id} front" 
+                             onerror="this.style.display='none'; this.parentElement.innerHTML='${card.id}<br>Add ${card.id}-front.png';">
                     </div>
-                `;
-                
-                grid.appendChild(cardEl);
-            });
-        }
+                    <div class="card-face card-back">
+                        <img src="images/${card.id}-back.png" alt="${card.id} back" 
+                             onerror="this.style.display='none'; this.parentElement.innerHTML='${card.id}<br>Add ${card.id}-back.png';">
+                    </div>
+                </div>
+            `;
+            
+            grid.appendChild(cardEl);
+        });
+    }
 
-        function flipCard(card) {
-            card.classList.toggle('flipped');
-        }
-    </script>
+    function flipCard(card) {
+        card.classList.toggle('flipped');
+    }
+</script>
 </body>
 </html>
