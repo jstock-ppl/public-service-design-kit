@@ -182,7 +182,7 @@
             margin: 0;
         }
         
-        .back-btn:hover {
+                .back-btn:hover {
             background: #555555;
             transform: translateY(-2px);
         }
@@ -195,23 +195,19 @@
             color: #333333;
             margin: 0;
         }
-        margin-bottom: 1rem;
+        
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 2rem;
         }
-
-
-.cards-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-}
-
-
+        
         .card {
             cursor: pointer;
             transition: transform 0.3s ease;
             perspective: 1000px;
         }
-
+        
         .card:hover {
             transform: translateY(-5px);
         }
